@@ -1,0 +1,30 @@
+<ion-header class="noshow">
+
+  <ion-navbar>
+    <ion-title>mensagens</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    
+  <page-header></page-header>
+
+  <div class="row">
+    <p *ngIf="mensagens && mensagens.length == 0" style="text-align:center;padding: 10px;">Você não possui notificações.</p>
+      <div *ngIf="mensagens && mensagens.length > 0" class="col s12 m7">
+        
+        <div *ngFor="let item of mensagens" class="card">          
+          <div class="card-content">
+            <b>{{ item.name }}</b>
+            <p>{{ item.texto }}</p>
+          </div>
+          <div class="card-action">
+            <a style="color:red;" (click)="remover(item.id)">Remover</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+</ion-content>

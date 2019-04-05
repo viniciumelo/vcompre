@@ -1,0 +1,419 @@
+<ion-header class="noshow">
+
+  <ion-navbar>
+    <ion-title>loja</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <page-header></page-header>
+
+  <div class="animated fadeInUp slider">
+      <ul id="slides" class="slides"></ul>
+  </div>
+
+  <!-- <a *ngIf="produto.video" [href]="produto.video" class="btn btn-floating btn-large blue darken-1"
+    style="float: right;margin-top: -28px;z-index: 9;margin-right: 10px;">
+      <i class="material-icons" style="font-size: 22pt;">play_circle_outline</i>
+    </a>  -->
+
+  <a *ngIf="Global.userData() != null" (click)="avaliacao()" class="btn btn-floating btn-large" 
+    style="float: right;margin-top: -46px;z-index: 9;margin-right: 65px;background: #0083ca; width:45px; height: 45px;">
+    <i class="material-icons" style="line-height: 48px;">thumbs_up_down</i>
+  </a>
+            
+  <a *ngIf="Global.userData() != null && !loja.favorito" (click)="favoritar()" class="btn btn-floating btn-large pulse" 
+  style="float: right;margin-top: -46px;z-index: 9;margin-right: 10px;background: #0083ca; width:45px; height: 45px;">
+    <i class="fa fa-heart-o" style="line-height: 48px;"></i>
+  </a>
+  <a *ngIf="Global.userData() != null && loja.favorito" (click)="favoritar()" class="btn btn-floating btn-large" 
+  style="float: right;margin-top: -46px;z-index: 9;margin-right: 10px;background: #0083ca; width:45px; height: 45px;">
+    <i class="fa fa-heart" style="line-height: 48px;"></i>
+  </a>
+
+    <div class="animated fadeInUp row">            
+
+        <ul class="tabs">
+          <li class="tab col s3"><a  style="color:#02659b" class="active" href="#test1"><b>Ofertas</b></a></li>
+          <li class="tab col s3">
+            <a (click)="clickTab(1)" href="#test2" style="color:#02659b">
+              <b>Informações</b>
+            </a>
+          </li>         
+        </ul>
+      
+
+      <div id="test1" class="row">
+
+        <div *ngFor="let categoria of ofertas">
+          <div (click)="collapse(categoria.id)" style="border-bottom: 1px solid #efefef;padding: 10px;margin-bottom:unset;">            
+            <b>{{ categoria.nome }}  </b>
+            <i class="material-icons" style="float: right">expand_more</i>
+          </div>
+          <div id="produtos-{{ categoria.id }}">
+              <div *ngFor="let item of categoria.produtos" (click)="pushPageParams('Produto', {'id':item.id})" style="margin-top: 10px;overflow:hidden;border-bottom: 1px solid #efefef;">
+                  <div style="float:left; width: 25%; display:flex; justify-content:center;">
+                    <img [src]="Global.filesURL+'/produtos/'+item.foto" style="margin-bottom: 5px;width: 70px;border-radius: 10px;height: 70px;"/>                     
+                  </div>
+                  <div style="float:left;width: 75%;">
+                    
+                    <div style="width:100%;">
+                      <b style="width:65%;float:left;">{{item.nome}}</b>
+                      <div style="width:35%;float:right;">                          
+                          <b *ngIf="Global.calcularValor(item) == 0" style="color:green">GRÁTIS</b>
+                          <b *ngIf="Global.calcularValor(item) > 0" style="color:#02659b">R$ {{ Global.calcularValor(item) }}</b> <br>
+                      </div>
+                    </div>
+          
+                    <div style="width:100%;float:left;">
+                        <p id="p-{{ item.id }}" *ngIf="item.descricao" style="width:65%;float:left;font-size:8pt;margin-bottom: 10px;margin-top:unset;">{{ Global.quebrarLinha('p-'+item.id, item.descricao) }}</p>
+                        <div *ngIf="item.desconto" style="width: 35%;float:right;">
+                            <b style="text-decoration: line-through;color:#b9b9b9;">R$ {{ item.valor }}</b>  
+                        </div>
+                        <b *ngIf="item.validade_promocao" style="width:65%;float:left;font-size:8pt;">Promoção Válida até: {{item.validade_promocao | date:'dd/MM/yyyy'}}</b>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>            
+
+          <div *ngIf="ofertas && ofertas.length == 0">
+            <p style="text-align: center;">
+              Opa! Em breve você poderá conferir nossos produtos e promoções, 
+              enquanto isso saiba mais sobre nós na aba informações.
+            </p>
+          </div>
+               
+      </div>
+      <div id="test2" class="col s12">
+            
+            <div *ngIf="loja.contato" style="width:100%;min-height: 50px;margin-top:10px;">
+              <div style="float:left; width: 20%; display: flex; justify-content: center;">                
+                <i style="font-size:15pt; margin-top:20px;" class="material-icons">thumbs_up_down</i>
+              </div>
+              <div style="float:left; width: 80%;padding-top: 20px;border-top: 1px solid #efefef;margin-bottom:10px;">
+                <b style="float:left;">Atendimento</b> <br>
+                <div style="width:35%;float:left;">
+                      
+                    <i *ngIf="loja.nota_atendimento >= 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_atendimento >= 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_atendimento >= 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_atendimento >= 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_atendimento == 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+
+                    <i *ngIf="loja.nota_atendimento > 0 && loja.nota_atendimento < 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_atendimento > 1 && loja.nota_atendimento < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_atendimento > 2 && loja.nota_atendimento < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_atendimento > 3 && loja.nota_atendimento < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_atendimento > 4 && loja.nota_atendimento < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+
+                    <i *ngIf="loja.nota_atendimento == 0" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_atendimento <= 1 && loja.nota_atendimento < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_atendimento <= 2 && loja.nota_atendimento < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_atendimento <= 3 && loja.nota_atendimento < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_atendimento <= 4 && loja.nota_atendimento < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    
+                </div>
+
+                <br>
+
+                <b style="margin-top:10px;">Qualidade dos produtos</b> <br>
+                <div style="float:left;">
+                      
+                    <i *ngIf="loja.nota_qualidade >= 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_qualidade >= 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_qualidade >= 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_qualidade >= 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_qualidade == 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+
+                    <i *ngIf="loja.nota_qualidade > 0 && loja.nota_qualidade < 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_qualidade > 1 && loja.nota_qualidade < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_qualidade > 2 && loja.nota_qualidade < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_qualidade > 3 && loja.nota_qualidade < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_qualidade > 4 && loja.nota_qualidade < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+
+                    <i *ngIf="loja.nota_qualidade == 0" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_qualidade <= 1 && loja.nota_qualidade < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_qualidade <= 2 && loja.nota_qualidade < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_qualidade <= 3 && loja.nota_qualidade < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_qualidade <= 4 && loja.nota_qualidade < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    
+                </div>
+
+                <br>
+
+                <b style="margin-top:10px;">Ambiente</b> <br>
+                <div style="float:left;">
+                      
+                    <i *ngIf="loja.nota_ambiente >= 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_ambiente >= 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_ambiente >= 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_ambiente >= 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                    <i *ngIf="loja.nota_ambiente == 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+
+                    <i *ngIf="loja.nota_ambiente > 0 && loja.nota_ambiente < 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_ambiente > 1 && loja.nota_ambiente < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_ambiente > 2 && loja.nota_ambiente < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_ambiente > 3 && loja.nota_ambiente < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                    <i *ngIf="loja.nota_ambiente > 4 && loja.nota_ambiente < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+
+                    <i *ngIf="loja.nota_ambiente == 0" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_ambiente <= 1 && loja.nota_ambiente < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_ambiente <= 2 && loja.nota_ambiente < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_ambiente <= 3 && loja.nota_ambiente < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    <i *ngIf="loja.nota_ambiente <= 4 && loja.nota_ambiente < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                    
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="loja.horarios != null && loja.horarios.length > 0" style="width:100%;min-height: 50px;margin-top:10px;">
+              <div style="float:left; width: 20%; display: flex; justify-content: center;">                
+                <i style="font-size:15pt; margin-top:20px;" class="material-icons">access_time</i>
+              </div>
+              <div style="float: left;width: 80%;padding-top: 15px;border-top: 1px solid #efefef;margin-bottom: 15px;">
+                <p style="margin:unset;" *ngFor="let item of loja.horarios">{{ Global.converterDay(item.dia) }} - {{ Global.formatHoras(item.inicio) | date:'HH:mm' }} às {{ Global.formatHoras(item.fim) | date:'HH:mm' }}</p>
+              </div>
+            </div>
+
+            <div *ngIf="loja.contato" style="width:100%;min-height: 50px;margin-top:10px;">
+              <div style="float:left; width: 20%; display: flex; justify-content: center;">                
+                <i style="font-size:15pt; margin-top:20px;" class="material-icons">phone</i>
+              </div>
+              <a href="tel:{{ loja.contato }}" style="float: left;width: 80%;padding-top: 15px;border-top: 1px solid #efefef;margin-bottom: 15px;">
+                <b>{{ loja.contato }}</b>                
+              </a>
+            </div>
+          
+            <div *ngIf="loja.carro_chefe" style="width:100%;min-height: 50px;margin-top:10px;">
+              <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                  <i style="font-size:15pt; margin-top:20px;" class="material-icons">restaurant</i>
+              </div>
+              <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                <p style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Carro Chefe</b><br>
+                  {{ loja.carro_chefe }}</p>
+              </div>
+            </div>
+          
+            <div style="width:100%;min-height: 50px;margin-top:10px;">
+                <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                    <i style="font-size:15pt; margin-top:20px;" class="material-icons">directions_car</i>                  
+                </div>
+                <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                  <p *ngIf="loja.estacionamento == 0" style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Estacionamento</b><br>
+                  Não</p>
+                  <p *ngIf="loja.estacionamento == 1" style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Estacionamento</b><br>
+                    Sim</p>
+                </div>
+              </div>
+            
+              <div *ngIf="loja.detalhes" style="width:100%;min-height: 50px;margin-top:10px;">
+                  <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                      <i style="font-size:15pt; margin-top:20px;" class="material-icons">info</i>                    
+                  </div>
+                  <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                    <p style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Detalhes</b><br>
+                      {{ loja.detalhes }}</p>
+                  </div>
+                </div>
+          
+                <div *ngIf="loja.formas_pagamentos" style="width:100%;min-height: 50px;margin-top:10px;">
+                    <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                        <i style="font-size:15pt; margin-top:20px;" class="material-icons">credit_card</i>
+                    </div>
+                    <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                      <p style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Formas de Pagamento</b><br>
+                        {{ loja.formas_pagamentos }}</p>
+                    </div>
+                  </div>
+          
+                  <div *ngIf="loja.bom_para" style="width:100%;min-height: 50px;margin-top:10px;">
+                      <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                          <i style="font-size:15pt; margin-top:20px;" class="material-icons">favorite</i>
+                      </div>
+                      <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                        <p style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Bom Para</b><br>
+                          {{ loja.bom_para }}</p>
+                      </div>
+                    </div>
+          
+                    <div *ngIf="loja.tipo_ambiente" style="width:100%;min-height: 50px;margin-top:10px;">
+                        <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                            <i style="font-size:15pt; margin-top:20px;" class="material-icons">store</i>
+                        </div>
+                        <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                          <p style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Tipo de Ambiente</b><br>
+                            {{ loja.tipo_ambiente }}</p>
+                        </div>
+                      </div>
+          
+                      <div *ngIf="loja.site" style="width:100%;min-height: 50px;margin-top:10px;">
+                          <div style="float:left; width: 20%; display: flex; justify-content: center;">                            
+                            <i style="font-size:15pt; margin-top:20px;" class="material-icons">public</i>
+                          </div>
+                          <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                              <a target="_blank" href="{{ loja.site }}">
+                            <p style="line-height: 17px;margin-bottom:12px;width:95%;float:left;max-width: 300px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap"><b style="color:black;">Site</b><br>
+                              {{ loja.site }}</p></a>
+                          </div>
+                        </div>
+          
+                        <div *ngIf="loja.facebook" style="width:100%;min-height: 50px;margin-top:10px;">
+                            <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                              <i style="font-size:15pt; margin-top:20px;" class="fa fa-facebook-official"></i>
+                            </div>
+                            <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                                <a target="_blank" href="{{ loja.facebook }}">
+                              <p style="line-height: 17px;margin-bottom:12px;width:95%;float:left;max-width: 300px;
+                              overflow: hidden;
+                              text-overflow: ellipsis;
+                              white-space: nowrap"><b style="color:black;">Facebook</b><br>
+                                {{ loja.facebook }}</p></a>
+                            </div>
+                          </div>
+          
+                          <div *ngIf="loja.instagram" style="width:100%;min-height: 50px;margin-top:10px;">
+                              <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                                <i style="font-size:15pt; margin-top:20px;" class="fa fa-instagram"></i>
+                              </div>
+                              <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                                  <a target="_blank" href="{{ loja.instagram }}">
+                                <p style="line-height: 17px;margin-bottom:12px;width:95%;float:left;max-width: 300px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap"><b style="color:black;">Instagram</b><br>
+                                  {{ loja.instagram }}</p></a>
+                              </div>
+                            </div>
+
+                          <div *ngIf="loja.whatsapp" style="width:100%;min-height: 50px;margin-top:10px;">
+                              <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                                <i style="font-size:15pt; margin-top:20px;" class="fa fa-whatsapp"></i>
+                              </div>
+                              <div style="float:left; width: 80%;border-top: 1px solid #efefef;">                                                                
+                                <p style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Whatsapp</b><br>
+                                  <a href="https://api.whatsapp.com/send?phone={{ loja.whatsapp }}">{{ loja.whatsapp }}</a>
+                                </p>                                
+                              </div>
+                            </div>
+
+                            <div *ngIf="loja.youtube" style="width:100%;min-height: 50px;margin-top:10px;">
+                                <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                                  <i style="font-size:15pt; margin-top:20px;" class="fa fa-youtube"></i>
+                                </div>
+                                <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                                    <a target="_blank" href="{{ loja.youtube }}">
+                                  <p style="line-height: 17px;margin-bottom:12px; width:95%;float:left;max-width: 300px;
+                                  overflow: hidden;
+                                  text-overflow: ellipsis;
+                                  white-space: nowrap"><b style="color:black;">Youtube</b><br>
+                                    {{ loja.youtube }}</p></a>
+                                </div>
+                              </div>
+          
+                            <div *ngIf="loja.endereco" style="width:100%;min-height: 50px;margin-top:10px;">
+                                <div style="float:left; width: 20%; display: flex; justify-content: center;">
+                                    <i style="font-size:15pt; margin-top:20px;" class="material-icons">map</i>
+                                </div>
+                                <div style="float:left; width: 80%;border-top: 1px solid #efefef;">
+                                  <p style="line-height: 17px;margin-bottom:12px;"><b style="color:black;">Endereço</b><br>
+                                    {{ loja.endereco }}, {{ loja.bairro }}, {{ loja.numero }}, {{ loja.cidade }}-{{ loja.estado }}</p>
+                                </div>
+                              </div>
+          
+                              
+                              <div #mapa id="mapa"></div>
+      </div>      
+    </div>
+      
+ 
+    <div class="jconfirm jconfirm-modern jconfirm-open" id="modal-avaliacao" style="display:none; z-index:9999;overflow:auto;">
+        <div class="jconfirm-bg" style="transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);"></div>
+        <div class="jconfirm-scrollpane">
+            <div class="jconfirm-row">
+                <div class="jconfirm-cell">
+                    <div class="jconfirm-holder">
+                        <div class="jc-bs3-container container">
+                            <div class="jc-bs3-row justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center">
+                                <div class="jconfirm-box-container jconfirm-animated col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 jconfirm-no-transition" style="transform: translate(0px, 0px); transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);">
+                                    <div class="jconfirm-box jconfirm-hilight-shake jconfirm-type-black jconfirm-type-animated" role="dialog" aria-labelledby="jconfirm-box44094" tabindex="-1" style="transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1); transition-property: all, margin;">
+                                        <div class="jconfirm-closeIcon" style="display: block;" onclick="$('#modal-avaliacao').fadeOut('100');$('#mascara').hide();">×</div>
+                                        <div class="jconfirm-content-pane no-scroll" style="transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);overflow: auto;">
+                                            <div class="jconfirm-content" id="jconfirm-box44094" style="margin-bottom:unset;">
+                                                
+                                                <p style="text-align: center">
+                                                    Avalie {{ loja.name }} de acordo com os critérios abaixo:
+                                                  </p>            
+                                                    
+                                                    <div>
+                                                      <h5 style="text-align: center;">
+                                                        Atendimento
+                                                      </h5>
+                                                      <div style="display:flex; justify-content: center;">
+                                                        <select id="atendimento" style="text-align: center;">
+                                                          <option value="1">1</option>
+                                                          <option value="2">2</option>
+                                                          <option value="3">3</option>
+                                                          <option value="4">4</option>
+                                                          <option value="5">5</option>
+                                                        </select>
+                                                      </div>
+                                                    </div>
+                                            
+                                                    <div style="margin-top:15px;">
+                                                      <h5 style="text-align: center;">
+                                                        Qualidade dos produtos
+                                                      </h5>
+                                                      <div style="display:flex; justify-content: center;">
+                                                        <select id="qualidade" style="text-align: center;">
+                                                          <option value="1">1</option>
+                                                          <option value="2">2</option>
+                                                          <option value="3">3</option>
+                                                          <option value="4">4</option>
+                                                          <option value="5">5</option>
+                                                        </select>
+                                                      </div>
+                                                    </div>
+                                            
+                                                      <div style="margin-top:15px;">
+                                                        <h5 style="text-align: center;">
+                                                          Ambiente
+                                                        </h5>
+                                                        <div style="display:flex; justify-content: center;">
+                                                          <select id="ambiente" style="text-align: center;">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                          </select>
+                                                        </div>
+                                                      </div>
+
+                                                      <div class="form_row" style="margin-top:15px;">
+                                                          <textarea id="mensagem" name="mensagem" ngModel class="form_textarea valid" style="height:unset;" rows="5" placeholder="Digite sua mensagem..."></textarea>
+                                                        </div>
+  
+                                            </div>
+                                        </div>           
+                                        <div class="jconfirm-buttons">
+                                          <button type="button" class="btn btn-primary blue darken-1" (click)="avaliar()">AVALIAR</button>
+                                          <button type="button" class="btn btn-primary grey lighten-1" onclick="$('#modal-avaliacao').fadeOut('200'); $('#mascara').hide();">CANCELAR</button>
+                                        </div>                             
+                                        <div class="jconfirm-clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+                  
+</ion-content>

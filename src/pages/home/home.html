@@ -1,0 +1,123 @@
+<ion-header class="noshow">
+  <ion-navbar>
+    <ion-title>
+      
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <page-header></page-header>  
+
+  <div *ngIf="!categoria_id && !categoria_nome && !pesquisa" class="slider">
+    <ul id="slides" class="slides"></ul>
+  </div>
+
+    <div class="chip" *ngIf="categoria_id && categoria_nome && categoria_nome != '#vazio#'" 
+      style="background: #ff3333;width: 100%;border-radius: unset;margin-right: unset;height: 50px;padding: 10px;">
+        <b style="font-size: 15px;color:white;">{{ categoria_nome }}</b>
+        <i (click)="removerCategoria()" class="close material-icons" style="color:white;">close</i>
+    </div>
+
+    <div class="chip" *ngIf="pesquisa" 
+      style="background: #ff3333;width: 100%;border-radius: unset;margin-right: unset;height: 50px;padding: 10px;">
+        <b style="font-size: 15px;color:white;">Busca: {{ pesquisa }}</b>
+        <i (click)="removerCategoria()" class="close material-icons" style="color:white;">close</i>
+    </div>
+  
+  <!-- <div  class="row" style="height: 50px; padding: 15px;margin-bottom:unset;background: #ddd;">
+    <b></b>
+  </div> -->
+
+  <div class="row">
+      <div *ngIf="!categorias_id && !categoria_nome">
+        <ul class="tabs">
+        <li (click)="changeTab(0)" class="tab col s3"><a style="color: #ff3333!important;" [ngClass]="getClass(0)" class="blue-text" href="#test1"><b>Lojas</b></a></li>
+        <li (click)="changeTab(1)" class="tab col s3"><a style="color: #ff3333 !important;" [ngClass]="getClass(1)" class="blue-text" href="#test2"><b>Ofertas</b></a></li>			
+        </ul>
+      </div>
+      <div *ngIf="Global.lojas" id="test1" class="col s12">
+          <div *ngFor="let item of Global.lojas" (click)="pushPageParams('Loja', {'id': item.id})" style="margin-top: 10px;overflow: hidden;border-bottom: 1px solid #efefef;padding-bottom: 10px;">
+              <div style="float:left; width: 25%; display:flex; justify-content:center;">
+                <img [src]="Global.filesURL+'/usuarios/'+item.foto"
+                    style="width: 70px;border-radius: 10px;height: 70px;"/>
+              </div>
+              <div style="float:left;width: 75%;">
+                
+                <div style="width:100%;">
+                  <b style="width:65%;float:left;color:#404040;">{{ item.name }} 
+                      <span *ngIf="Global.lat && Global.lng"><br> {{ calcularDistancia(item) }}Km</span>
+                    </b>
+                  
+                  <div style="width:35%;float:left;">
+                      
+                      <i *ngIf="item.nota >= 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                      <i *ngIf="item.nota >= 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                      <i *ngIf="item.nota >= 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                      <i *ngIf="item.nota >= 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+                      <i *ngIf="item.nota == 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star"></i>
+
+                      <i *ngIf="item.nota > 0 && item.nota < 1" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                      <i *ngIf="item.nota > 1 && item.nota < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                      <i *ngIf="item.nota > 2 && item.nota < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                      <i *ngIf="item.nota > 3 && item.nota < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+                      <i *ngIf="item.nota > 4 && item.nota < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-half-o"></i>
+
+                      <i *ngIf="item.nota == 0" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                      <i *ngIf="item.nota <= 1 && item.nota < 2" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                      <i *ngIf="item.nota <= 2 && item.nota < 3" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                      <i *ngIf="item.nota <= 3 && item.nota < 4" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+                      <i *ngIf="item.nota <= 4 && item.nota < 5" style="font-size: 10pt;color:#ffcc03;" class="fa fa-star-o"></i>
+
+                      <span *ngIf="item.aberto" style="float: left;margin-left: unset;" class="new badge blue darken-1" data-badge-caption="ABERTO"></span>
+                      <span *ngIf="!item.aberto" style="float: left;margin-left: unset;" class="new badge red darken-1" data-badge-caption="FECHADO"></span>
+                      <img *ngIf="item.destaque == 1" src="assets/images/destaque.png" style="width: 60px; float: left;margin-top: 5px;"/>
+                  </div>
+
+                </div>                      
+              </div>
+          </div>
+          <div *ngIf="Global.lojas && Global.lojas.length == 0">
+            <p style="text-align: center;">Nenhuma loja foi encontrada.</p>
+          </div>
+      </div>
+      <div *ngIf="ofertas" id="test2" class="col s12">
+          
+        <div *ngFor="let item of ofertas" (click)="pushPageParams('Produto', {'id':item.id})" style="margin-top: 10px;overflow:hidden;border-bottom: 1px solid #efefef;">
+            <div style="float:left; width: 25%; display:flex; justify-content:center;">
+                <img [src]="Global.filesURL+'/produtos/'+item.foto"
+                    style="width: 70px;border-radius: 10px;height: 70px;margin-bottom: 5px;"/>
+            </div>
+            <div style="float:left;width: 75%;">            
+                
+                <b style="width:65%;float:left;color:#404040;">{{ item.nome }}</b>
+                <div style="width:35%;float:right;text-align: right;">
+                    <b *ngIf="Global.calcularValor(item) == 0" style="color:green">GRÁTIS</b>
+                    <b *ngIf="Global.calcularValor(item) > 0" style="color:#02659b">R$ {{ Global.calcularValor(item) }}</b> <br>
+                    <b *ngIf="item.desconto" style="text-decoration: line-through;color:#b9b9b9;">R$ {{ item.valor }}</b>                    
+                </div>
+                                    
+                <b style="width:65%;float:left;font-size:8pt;">Vendido por: {{ item.username }}</b>                    
+                <b *ngIf="item.validade_promocao" style="width:65%;float:left;font-size:8pt;">Promoção válida até: {{item.validade_promocao | date:'dd/MM/yyyy'}}</b>
+                
+            </div>
+        </div>                    
+        <div *ngIf="ofertas && ofertas.length == 0">
+            <p style="text-align: center;">Nenhuma oferta foi encontrada.</p>
+        </div>
+                
+
+     </div>
+    </div>    
+
+    <div id="processando" style="display:none;">
+      <div style="display: flex;justify-content: center;margin-bottom: 20px;">
+        <img src="assets/images/loading.gif" style="width: 35px;height: 35px;">
+        <p style="margin-top: 8px;">
+          Processando...
+        </p>
+      </div>
+    </div>
+
+</ion-content>

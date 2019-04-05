@@ -1,0 +1,80 @@
+<ion-header class="noshow">
+
+  <ion-navbar>
+    <ion-title>perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <page-header></page-header>
+
+    <div class="row">
+        <div class="chip" style="background: #02659b;width: 100%;border-radius: unset;margin-right: unset;height: 50px;padding: 10px;display: flex;justify-content: center;">
+            <b style="font-size: 15px; color:white;">
+               PERFIL
+            </b>          
+        </div>
+
+        <form method="post" id="foto-form" enctype="multipart/form-data">
+          <input type="file" style="display:none" id="foto" name="foto" ngModel accept="image/*" (change)="getFilesMultiples($event)" >
+        </form>
+
+        <form class="col s12" *ngIf="usuario" #f="ngForm" (ngSubmit)="perfilSubmit(f)">
+            <div class="row">
+              
+              <div class="input-field col s12" style="display: flex; justify-content: center;">
+                <img *ngIf="!usuario || !usuario.foto" id="foto_perfil" onclick="$('#foto').click();" class="circle" style="width: 100px; height: 100px;" src="https://secompufscar.com.br/static/secompufscar2017/images/usuario_anonimo.jpg">
+                <img *ngIf="usuario && usuario.foto" id="foto_perfil" onclick="$('#foto').click();" class="circle" style="width: 100px; height: 100px;" [src]="Global.filesURL+'/usuarios/'+Global.userData().foto">
+              </div>
+              
+              <div class="input-field col s12">
+                <input id="name" type="text" class="validate" name="name" [ngModel]="usuario.name" required>
+                <label for="name">Nome</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="sobrenome" type="text" class="validate" name="sobrenome" [ngModel]="usuario.sobrenome">
+                <label for="sobrenome">CPF</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="email" type="email" class="validate" name="email" [ngModel]="usuario.email" disabled readonly required>
+                <label for="email">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="contato" type="text" class="validate" name="contato" [ngModel]="usuario.contato">
+                <label for="contato">Telefone</label>
+              </div>
+              
+              <div class="col s12">
+                <label>Sexo</label>
+                <p style="margin-left: 15px;">
+                    <input *ngIf="usuario.sexo == 0" name="sexo" type="radio" id="s_masculino1" value="0" checked/>
+                    <input *ngIf="usuario.sexo != 0" name="sexo" type="radio" id="s_masculino1" value="0"/>
+                    <label for="s_masculino1">Masculino</label>
+                </p>
+                <p style="margin-left: 15px;">
+                    <input *ngIf="usuario.sexo == 1" name="sexo" type="radio" id="s_feminino1" value="1" checked />
+                    <input *ngIf="usuario.sexo != 1" name="sexo" type="radio" id="s_feminino1" value="1" />
+                    <label for="s_feminino1">Feminino</label>
+                </p>
+              </div>
+              <div class="input-field col s12" style="margin-top:30px;">
+                <input id="nascimento" type="date" class="validate" name="nascimento" [ngModel]="usuario.nascimento">
+                <label class="active" for="nascimento">Data de Nascimento</label>
+              </div>
+              <p class="col s12">
+                <input type="checkbox" class="filled-in" id="filled-in-box"/>
+                <label for="filled-in-box">Desejo receber notificações</label>
+              </p>              
+            
+
+            </div>
+            <div style="display: flex; justify-content: center;">
+              <button class="btn blue darken-1 waves-effect waves-light" type="submit" name="action">Salvar                
+              </button>
+            </div>
+          </form>
+    </div>
+
+</ion-content>

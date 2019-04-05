@@ -1,0 +1,36 @@
+<ion-content>
+
+    <page-header></page-header>
+
+    <div class="row">
+        <div class="chip" style="background: #ff5400;width: 100%;border-radius: unset;margin-right: unset;height: 50px;padding: 10px;display: flex;justify-content: center;">
+            <b style="font-size: 15px; color:white;">
+               SEJA BEM VINDO
+            </b>          
+        </div>
+
+        <form method="post" id="foto-form" enctype="multipart/form-data">
+          <input type="file" style="display:none" id="foto" name="foto" ngModel accept="image/*" (change)="getFilesMultiples($event)" >
+        </form>
+
+        <form class="col s12" *ngIf="usuario" #f="ngForm" (ngSubmit)="perfilSubmit(f)">
+            <input id="name" type="text"  name="name" [ngModel]="usuario.name" required>
+            <div class="row">
+              
+              <div class="input-field col s12" style="display: flex; justify-content: center;">
+                <img *ngIf="!usuario || !usuario.foto" id="foto_perfil" onclick="$('#foto').click();" class="circle" style="width: 100px; height: 100px;" src="https://secompufscar.com.br/static/secompufscar2017/images/usuario_anonimo.jpg">
+                <img *ngIf="usuario && usuario.foto" id="foto_perfil" onclick="$('#foto').click();" class="circle" style="width: 100px; height: 100px;" [src]="Global.filesURL+'/usuarios/'+Global.userData().foto">
+              </div>
+              
+              <div class="input-field col s12">
+                <p>O V Compre e Ganhe é o melhor alidado do consumidor de moda do segmento de vestuário, ácessório e calçados, quando o assunto é relacionamentos é bons negócios.</p>
+                
+              </div>
+              
+
+            </div>
+           
+          </form>
+    </div>
+
+</ion-content>

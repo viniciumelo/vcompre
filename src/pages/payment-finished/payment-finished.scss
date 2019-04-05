@@ -1,0 +1,110 @@
+page-payment-finished {
+    .header {
+        &:after {
+            display: none;
+        }
+
+        .toolbar {
+            text-align: center;
+            text-transform: uppercase;
+
+            .toolbar-title {
+                font-weight: normal !important;
+                font-size: 2.4rem;
+            }
+        }
+    }
+    
+    .content {
+        background-image: url('../assets/imgs/menu.jpeg');
+        background-size: cover;
+    }
+
+    .steps {
+        display: flex;
+        margin-bottom: 2rem;
+
+        .step {
+            border: 2px solid #db5800;
+            padding: .7rem 1rem;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            color: #db5800;
+
+            &.current {
+                font-weight: 500;
+                border-width: 3px;
+            }
+
+            &.not-available {
+                color: #000;
+                border-color: #000;
+            }
+        }
+
+        .separator {
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            &:after {
+                background-color: #db5800;
+                content: ' ';
+                display: block;
+                height: 2px;
+                width: 100%;
+            }
+
+            &.not-available {
+                &:after {
+                    background-color: #000;
+                }
+            }
+        }
+    }
+
+    .page-content {
+        background-color: #fff;
+        border-radius: 12px;
+        border: 2px solid #db5800;
+        margin-bottom: 2rem;
+        padding: 4rem 2rem;
+
+        .icon {
+            text-align: center;
+            font-size: 6.5rem;
+            color: #4BB543;
+        }
+
+        h2, p {
+            text-align: center;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #4BB543;
+        }
+
+        p {
+            line-height: 1.5;
+            font-size: 2rem;
+        }
+    }
+
+    .page-button {
+        padding: 0 4rem;
+
+        .button {
+            font-size: 2.2rem;
+            color: #fff;
+            text-transform: uppercase;
+            height: 55px;
+            border-radius: 12px;
+            font-weight: normal;
+            box-shadow: none;
+        }
+    }
+}

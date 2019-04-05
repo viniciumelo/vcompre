@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>V Compre e Ganhe</title>
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <base href="/">
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">  
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <link rel="stylesheet" href="assets/css/lightbox.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600" />
+    
+
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  <link rel="stylesheet" href="assets/dist/themes/fontawesome-stars.css">
+  <link rel="stylesheet" href="assets/dist/themes/css-stars.css">
+  <link rel="stylesheet" href="assets/dist/themes/bootstrap-stars.css">
+  <link rel="stylesheet" href="assets/dist/themes/fontawesome-stars-o.css">
+  
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4e8ef7">
+  
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <style>
+    .tabs .indicator {        
+        background-color: #ff3333 !important;
+    }
+    .slider .indicators .indicator-item.active {
+      background-color: #ff3333!important;
+    }    
+  </style>
+  <!-- cordova.js required for cordova apps -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC4atBuM5qzRtKtaPQrXCL297RDt6hVlA"
+  async defer></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <style>    
+    p,b,a,span,div,label {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+
+  <script src="cordova.js"></script>
+
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.error('Error', err));
+    }
+  </script>-->
+
+  <!-- <link href="build/main.css" rel="stylesheet"> -->
+
+  <style>
+    
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #mapa {
+        width: 100%;
+        height: 200px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      /* html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      } */
+      #sidenav-overlay{
+        z-index:9;
+      }      
+
+      .slider .slides {
+        background-color: #ececec;
+      }
+    </style>
+
+</head>
+<body class="scheme-blue">
+
+  <!-- Ionic's root component and where the app will load -->
+  <ion-app></ion-app>
+
+  <div id="loading" class="three col" style="display:none;">
+    <div class="loader" id="loader-1"></div>
+  </div>
+  
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/lightbox.min.js"></script>
+  <!-- <script src="http://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <!-- Compiled and minified JavaScript -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
+  <script src="assets/js/materialize.js"></script>
+  <!-- <script src="assets/js/sidebar.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+  <script type="text/javascript" src="assets/js/qrcode.min.js"></script>
+  <script src="assets/dist/jquery.barrating.min.js"></script>
+
+
+  <!-- The polyfills js is generated during the build process -->
+  <script src="build/polyfills.js"></script>
+
+  <!-- The vendor js is generated during the build process
+       It contains all of the dependencies in node_modules -->
+  <script src="build/vendor.js"></script>
+
+  <!-- The main bundle js is generated during the build process -->
+  <script src="build/main.js"></script>
+
+  <!-- <script>
+    $(document).ready(function () {
+        $("html").niceScroll();
+    });    
+  </script> -->  
+
+
+  <script>
+    //onesignal: 0baa1c16-153b-48dd-933d-c3759894efad   
+  </script>
+
+</body>
+</html>

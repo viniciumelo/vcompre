@@ -1,0 +1,129 @@
+page-payment-form {
+    .header {
+        &:after {
+            display: none;
+        }
+
+        .toolbar {
+            text-align: center;
+            text-transform: uppercase;
+
+            .toolbar-title {
+                font-weight: normal !important;
+                font-size: 2.4rem;
+            }
+        }
+    }
+
+    .content {
+        background-image: url('../assets/imgs/menu.jpeg');
+        background-size: cover;
+    }
+
+    .steps {
+        display: flex;
+        margin-bottom: 2rem;
+
+        .step {
+            border: 2px solid #db5800;
+            padding: .7rem 1rem;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            color: map-get($colors, primary);
+
+            &.current {
+                font-weight: 500;
+                border-width: 3px;
+            }
+
+            &.not-available {
+                color: #000;
+                border-color: #000;
+            }
+        }
+
+        .separator {
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            &:after {
+                background-color: #db5800;
+                content: ' ';
+                display: block;
+                height: 2px;
+                width: 100%;
+            }
+
+            &.not-available {
+                &:after {
+                    background-color: #000;
+                }
+            }
+        }
+    }
+
+    .item {
+        background-color: transparent;
+        padding-left: 0;
+    }
+
+    .item-checkbox {
+        .checkbox {
+            margin-right: 1rem !important;
+            margin-left: 0 !important;
+        }
+
+        .item-inner {
+            border-bottom: 0 !important;
+            
+            .label {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    .field-group {
+        display: flex;
+        
+        .icon {
+            margin-right: 2rem;
+            width: 3rem;
+            padding-top: .5rem;
+            color: #db5800;
+            font-size: 3rem;
+        }
+
+        .field {
+            flex: 1;
+
+            p {
+                margin: 0;
+                font-size: 1.8rem;
+                color: #999;
+            }
+        }
+    }
+
+    .page-form {
+        background-color: #fff;
+        border-radius: 12px;
+        border: 2px solid #db5800;
+        margin-bottom: 2rem;
+        padding: 1rem 2rem;
+    }
+
+    .page-submit {
+        padding: 0 4rem;
+
+        .button {
+            font-size: 2.2rem;
+            color: #fff;
+            text-transform: uppercase;
+            height: 55px;
+            border-radius: 12px;
+            font-weight: normal;
+            box-shadow: none;
+        }
+    }
+}

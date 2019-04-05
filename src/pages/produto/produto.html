@@ -1,0 +1,181 @@
+<ion-header class="noshow">
+
+  <ion-navbar>
+    <ion-title>produto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <page-header></page-header>
+
+  <div class="slider" style="height: 200px;">
+    <ul id="slides" class="slides"></ul>
+  </div>
+
+  <a *ngIf="produto.video" [href]="produto.video" class="btn btn-floating btn-large"
+    style="float: right;margin-top: -28px;z-index: 9;margin-right: 10px; background:#0083ca;">
+      <i class="material-icons" style="font-size: 22pt;">play_circle_outline</i>
+    </a> 
+
+  <!-- <a *ngIf="Global.userData() != null && !produto.favorito" (click)="favoritar()" class="btn btn-floating btn-large blue darken-1 pulse" 
+     style="position: fixed;top: 65px;z-index: 9;right: 10px;">
+    <i class="fa fa-heart-o"></i>
+  </a>
+-->    
+  
+  <blockquote style="margin-top: 0px;border-left: 5px solid #0083ca;overflow: hidden;min-height: 50px;padding-top: 10px; margin-bottom: 0px;">
+    
+    <div style="width:100%; margin-bottom:10px;overflow: hidden;min-height: 70px;">
+      <div style="float: left">
+
+        <span style="font-size:15pt;text-align: center;margin-top:10px;">{{ produto.nome }}</span>
+        <p style="margin-top:unset;margin-bottom:unset;">
+          <b style="font-size: 15pt; color:#02659b;">R$ {{ Global.calcularValor(produto) }}</b>
+          <span *ngIf="produto.desconto" style="margin-left:10px;font-size: 14px;text-decoration: line-through;color:#b9b9b9;">
+            R$ {{ produto.valor }}
+          </span>
+        </p>
+        <p *ngIf="produto.validade_promocao" style="margin-top:unset;margin-bottom:10px;">
+          Promoção válida até: {{produto.validade_promocao | date:'dd/MM/yyyy'}}
+          <!-- ou 5x R$ 5,00 no cartão -->
+        </p>
+      </div>          
+      
+      
+      <!-- <div (click)="baixarCupom()" style="border-left: 2px solid #ddd;width: 35%; float: right;display: flex;justify-content: flex-end;padding-right: 10px;">
+        <p style="text-align: center; margin-top:10px; width: 100%;">
+          Baixar Cupom <br>
+          <i style="margin-top:5px;" class="material-icons">file_download</i>
+        </p>
+      </div> -->
+
+    </div>
+                    
+  </blockquote>
+
+  <div class="row" style="margin-bottom:10px;border-top:1px solid #ddd;">
+    
+    <div (click)="favoritar()" style="float:left;width:25%;margin-top:10px;display: flex;justify-content: center;">      
+      <p *ngIf="!produto.favorito" style="text-align: center;margin: 0;line-height: 15px;font-size: 12px;"><i class="material-icons">favorite_border</i><br>Favorito</p>
+      <p *ngIf="produto.favorito == 1" style="text-align: center;margin: 0;line-height: 15px;font-size: 12px;"><i class="material-icons">favorite</i><br>Favorito</p>
+    </div>
+
+    <div style="float:left;width:25%;margin-top:10px;display: flex;justify-content: center;border-left: 1px solid #ddd;">
+      <p style="text-align: center;margin: 0;line-height: 15px;font-size: 12px; max-width: 190px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+        <i class="material-icons">remove_red_eye</i><br>{{ produto.visualizacoes }}</p>
+    </div>
+
+    <div style="float:left;width:25%;margin-top:10px;display: flex;justify-content: center;border-left: 1px solid #ddd;">
+      <p style="text-align: center;margin: 0;line-height: 15px;font-size: 12px;">
+        <i class="material-icons">thumb_up</i><br>{{ likes }}</p>
+    </div>
+
+    <div *ngIf="produto.cupom == 1" (click)="baixarCupom()" style="float:left;width:25%;margin-top:10px;display: flex;justify-content: center;border-left: 1px solid #ddd;">
+      <p style="text-align: center;margin: 0;line-height: 15px;font-size: 12px;"><i class="material-icons">file_download</i><br>Baixar Cupom</p>
+    </div>
+    <div *ngIf="produto.cupom != 1" style="float:left;width:25%;margin-top:10px;display: flex;justify-content: center;border-left: 1px solid #ddd;">
+      <p style="text-align: center;margin: 0;line-height: 15px;font-size: 12px; color:rgb(194, 194, 194);"><i class="material-icons">file_download</i><br>Indisponível</p>
+    </div>
+
+  </div>
+
+  <ul class="collapsible" data-collapsible="expandable" style="margin-bottom: 55px;margin-top: 0px;">
+    <li class="active">
+      <div class="collapsible-header active"><i class="material-icons">apps</i>Detalhes</div>
+      <div class="collapsible-body" style="display:block;">
+        <span *ngIf="produto.detalhes">{{ produto.detalhes }}</span>
+        <span *ngIf="!produto.detalhes">Produto não possui detalhes.</span>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">assignment</i>Políticas da Loja</div>
+      <div class="collapsible-body">
+          <span *ngIf="config.politica">{{ config.politica }}</span>
+          <span *ngIf="!config.politica">Política da loja não cadastrada.</span>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">forum</i>Avaliações</div>
+      <div class="collapsible-body" style="padding:10px">          
+
+          <ul class="collection">
+              
+            <li *ngFor="let item of avaliacoes" class="collection-item avatar" style="min-height: unset;">
+                <img *ngIf="item.foto_usuario" [src]="Global.filesURL+'/usuarios/'+item.foto_usuario" alt="" class="circle">
+                <img *ngIf="!item.foto_usuario" src="assets/images/nouser.jpg" alt="" class="circle">
+                <span class="title"><b>{{ item.nome_usuario }}</b></span>
+                <p>{{ item.mensagem }}
+                </p>
+                <p style="font-size: 9pt;">{{ item.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+              </li>
+              
+              <!-- <li class="collection-item" style="min-height: unset;">                                    
+                  <p *ngIf="avaliacoes.length > 5" style="text-align: center">Ver todos os comentários                   
+                  </p>                  
+              -->
+              <p *ngIf="avaliacoes.length == 0" style="text-align: center">Esse produto não possui avaliações.
+              </p>            
+        </ul>
+          
+          
+      </div>
+    </li>
+  </ul>
+
+  <div style="width: 100%; height: 48px; background: white;position:fixed;bottom:0;z-index:9;">
+    <a (click)="pushPageParams('Loja', {'id': produto.user_id})" class="waves-effect waves-light btn" style="float:left;width:80%;margin-top: 6px; margin-left: 6px;background: #02659b;">Ver todos produtos da loja</a>
+    <a (click)="comentar()" class="waves-effect waves-light btn" style="float: right;width:15%;margin-top: 6px; margin-right: 6px;display:flex;justify-content: center;background: #02659b;">
+      <i class="material-icons">forum</i>
+    </a>   
+  </div>
+
+
+  <div *ngIf="Global.userData() != null" class="jconfirm jconfirm-modern jconfirm-open" id="avaliacao" style="display:none; z-index: 999;">
+      <div class="jconfirm-bg" style="transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);"></div>
+      <div class="jconfirm-scrollpane">
+          <div class="jconfirm-row">
+              <div class="jconfirm-cell">
+                  <div class="jconfirm-holder" style="padding-top: 40px; padding-bottom: 40px;">
+                      <div class="jc-bs3-container container">
+                          <div class="jc-bs3-row justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center">
+                              <div class="jconfirm-box-container jconfirm-animated col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 jconfirm-no-transition" style="transform: translate(0px, 0px); transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);">
+                                  <div class="jconfirm-box jconfirm-hilight-shake jconfirm-type-black jconfirm-type-animated" role="dialog" aria-labelledby="jconfirm-box44411" tabindex="-1" style="transition-duration: 0.4s; transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1); transition-property: all, margin;">
+                                      <div class="jconfirm-closeIcon" style="display: block;" onclick="$('#avaliacao').fadeOut('100');">×</div>
+                                      <div class="jconfirm-title-c"><span class="jconfirm-title">Comentar Produto</span></div>
+    
+                                          <div class="jconfirm-content" id="jconfirm-box44411" >
+    
+                                            <div class="page_single layout_fullwidth_padding">
+                                              <div class="contactform">
+                                                <form class="" id="AvalicaoForm" novalidate="novalidate" #l="ngForm" (ngSubmit)="MensagemSubmit(l)">
+                                                        
+                                                  <div class="form_row">
+                                                    <textarea id="texto" name="texto" ngModel class="form_textarea valid" style="height:unset;" rows="5" placeholder="Digite sua mensagem..."></textarea>
+                                                  </div>
+                                                  <input type="hidden"  name="user_id" [ngModel]="Global.userData().id"/>
+                                                  <input type="hidden" id="produto_id" name="produto_id" [ngModel]="produto.id" />
+    
+                                                  <div class="jconfirm-buttons" style="margin-top:20px;">
+                                                    <button type="submit" class="btn btn-primary full blue darken-1">Enviar</button>
+                                                    <button id="#" type="button" onclick="$('#avaliacao').fadeOut('100');" class="btn blue darken-1 btn-primary full">Fechar</button>
+    
+                                                  </div>
+    
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <div class="jconfirm-clear"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+</ion-content>

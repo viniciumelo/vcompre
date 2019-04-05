@@ -1,0 +1,7 @@
+{
+  "name": "acheipalmas",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

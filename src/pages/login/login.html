@@ -1,0 +1,53 @@
+
+
+
+<ion-content >
+
+  
+
+  <div  class="row">
+
+      
+      <div class="">
+
+          
+        <form class="loginform" #l="ngForm" (ngSubmit)="LoginSubmit(l)">
+          <div class="row">
+            <div class="">
+              <img src="assets/images/banner.png" alt="" class="responsive-img valign profile-image-login">
+              
+            </div>
+            
+            
+          </div>
+          <div padding>
+          <ion-card class="card">
+          <ion-row class="more-opt">
+              <button class="card-b1" >Seus pontos valem muito</button>
+            </ion-row>
+            <div class="input-container2">
+              <i class="material-icons prefix">perm_identity</i>
+              <input class="validate" id="email" type="email"  name="email" ngModel class="imput-1" placeholder="Email" >
+              
+            </div>
+            <div class="input-container2">
+              <i class="material-icons prefix">lock_outline</i>
+              <input id="password" type="password" name="password" ngModel class="imput-1" placeholder="Senha" >
+              
+            </div>
+          
+          <div class="row">
+            <div class="input-container2">
+              <button type="submit" class="card-b2">ENTRAR</button>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+          <div class="card-txt" align="center" (click)="pushPage('Cadastro')" > <h5>Não possui conta?  <b style="color: #488aff;">Cadastrar </b> </h5>	</div>
+		<div class="card-txt" align="center" > <h5> Esqueceu a sua senha? <b style="color: #488aff;">Recuperar </b> </h5>	</div>
+  
+        </form>
+      </div>
+    </div>
+
+</ion-content>

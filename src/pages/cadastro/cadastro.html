@@ -1,0 +1,71 @@
+
+
+
+<ion-content >
+
+  
+
+  
+
+      
+   
+      <form class="LoginForm" #f="ngForm" (ngSubmit)="RegistroSubmit(f)" ngNativeValidate>
+          <div padding>
+                                                      
+              <!-- <div class="loginform">                                                                  -->
+                      <div class="row">
+                          <ion-card class="card">
+                             
+                      <div class="input-container2">
+                          <label class="control-label"><b>Nome</b></label>
+                          <input type="text" name="name" ngModel class="form_input" required>
+                      </div>
+
+                      <div class="input-container2">
+                          <label class="control-label"><b>Email</b></label>
+                          <input type="email" name="email" ngModel class="form_input" required>
+                      </div>
+                      <div class="input-container2">
+                          <label class="control-label"><b>Telefone</b></label>
+                          <input type="text" name="contato" ngModel class="form_input" required>
+                      </div>
+                      
+                      <div class="input-container2">
+                      <label class="control-label"><b>Sexo</b></label>
+                      <p style="margin-left: 15px;">
+                          <input name="sexo" type="radio" id="s_masculino" value="0" checked ngModel/>
+                          <label for="s_masculino">Masculino</label>
+                      </p>
+                      <p style="margin-left: 15px;">
+                          <input name="sexo" type="radio" id="s_feminino" value="1" ngModel/>
+                          <label for="s_feminino">Feminino</label>
+                      </p>
+                      
+                    </div>
+                      <div class="input-container2">
+                          <label class="control-label"><b>Data de Nascimento</b></label>
+                          <input type="date" name="nascimento" ngModel class="" required>
+                      </div>
+                      <div class="input-container2">
+                          <label class="control-label"><b>Senha</b></label>
+                          <input type="password" id="password" name="password" ngModel class="imput-1" required>
+                      </div>
+                      <div class="input-container2">
+                          <label class="control-label"><b>Confirme a Senha</b></label>
+                          <input type="password" id="password_confirmation" name="password_confirmation" ngModel class="imput-1" placeholder="" required>
+                      </div>
+
+                          </ion-card>
+
+              </div>
+          </div>
+
+          <div class="input-container2">
+              <button type="submit" class="card-b2">Registrar</button>                                                                                            
+            </div>
+      
+    </form>
+  
+    
+
+</ion-content>

@@ -1,0 +1,79 @@
+<ion-header class="noshow">
+
+  <ion-navbar>
+    <ion-title>categorias</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <page-header></page-header>
+
+  <div class="row">
+      <div class="chip" style="background: #02659b; width: 100%;border-radius: unset;margin-right: unset;height: 50px;padding: 10px;display: flex;justify-content: center;">
+          <b style="font-size: 15px; color:white;">
+             CATEGORIAS
+          </b>          
+      </div>
+    <div>
+      <ul class="tabs">
+      <li class="tab col s3"><a class="active blue-text" style="color: #02659b !important;" href="#test1"><b>Lojas</b></a></li>
+      <li class="tab col s3"><a class="blue-text" style="color: #02659b !important;" href="#test2"><b>Ofertas</b></a></li>			
+      </ul>
+    </div>
+    <div id="test1" class="row">
+        
+        <div  *ngFor="let item of categorias_empresa">
+            <div (click)="collapse(item.id)" class="row" style="border-bottom: 1px solid #ddd;padding: 15px;margin-bottom:unset;">
+                <i *ngIf="item.icone" style="float:left;" class="material-icons">{{ item.icone }}</i>
+                <p style="margin: 0;float: left;margin-top: 3px;margin-left: 5px;"><b> {{ item.nome }}</b></p>
+                <i class="material-icons" style="float: right">expand_more</i>
+            </div>
+            <div id="list-{{ item.id }}" style="display:none;">
+              <div (click)="filtrarLoja(subitem)" *ngFor="let subitem of item.subcategorias" class="row" style="padding-bottom: 15px; padding-left: 15px; border-bottom: 1px solid #ddd;margin-bottom:unset;margin-top: 15px;">
+                {{ subitem.nome }}
+              </div>
+            </div>
+          </div>
+      
+        <!-- <div *ngIf="Global.lojas.length == 0">
+          <p style="text-align: center;">Nenhuma loja foi encontrada.</p>
+        </div> -->
+    </div>
+    <div id="test2" class="row">
+        
+          <div  *ngFor="let item of categorias">
+            <div (click)="collapse(item.id)" class="row" style="border-bottom: 1px solid #ddd; padding: 15px;margin-bottom:unset;">
+              <i *ngIf="item.icone" style="float:left;" class="material-icons">{{ item.icone }}</i>
+              <p style="margin: 0;float: left;margin-top: 3px;margin-left: 5px;"><b> {{ item.nome }}</b></p>
+              <i class="material-icons" style="float: right">expand_more</i>
+            </div>
+            <div id="list-{{ item.id }}" style="display:none;">
+              <div (click)="filtrarOferta(subitem)" *ngFor="let subitem of item.subcategorias" class="row" style="padding-bottom: 15px; padding-left: 15px; border-bottom: 1px solid #ddd;margin-bottom:unset;margin-top: 15px;">
+                {{ subitem.nome }}
+              </div>
+            </div>
+          </div>
+                         
+      <!-- <div *ngIf="ofertas.length == 0">
+          <p style="text-align: center;">Nenhuma oferta foi encontrada.</p>
+      </div> -->
+   </div>
+  </div>
+
+  
+  <!-- <div *ngFor="let item of categorias">
+    <div (click)="collapse(item.id)" class="row" style="background: #ddd; padding: 15px;margin-bottom:unset;">
+      <b>{{ item.nome }}</b>
+      <i class="material-icons" style="float: right">expand_more</i>
+    </div>
+    <div id="list-{{ item.id }}">
+      <div (click)="filtrar(subitem)" *ngFor="let subitem of item.subcategorias" class="row" style="padding-bottom: 15px; padding-left: 15px; border-bottom: 1px solid #ddd;margin-bottom:unset;margin-top: 15px;">
+        {{ subitem.nome }}
+      </div>
+    </div>
+  </div> -->
+    
+
+</ion-content>

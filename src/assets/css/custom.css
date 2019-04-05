@@ -1,0 +1,476 @@
+
+.content {
+  background-image: url('../imgs/menu.jpeg');
+  background-size: cover;
+}
+
+
+.noshow{
+    display:none;
+    background: #ff5400;
+    background-color: #ff5400;
+}
+.menu{
+    margin-top: -21px;
+}
+
+html {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+}
+
+/* loader */
+
+/* html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+} */
+
+/* a{
+  text-decoration: none;
+} */
+
+/* GRID */
+
+.three { width: 23.8%; }
+
+/* COLUMNS */
+
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+
+.three{
+  background-color: white;
+  padding: 50px 0;
+  width: 100%;
+  height: 100%;
+  top: -4px;
+  position: fixed;
+  z-index: 999;
+  left: -6px;
+}
+
+/* ALL LOADERS */
+
+.loader{
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  position: relative;
+  /* margin: 0 auto; */
+  margin-left: 47%;
+  top: 50%;
+}
+
+/* LOADER 1 */
+
+#loader-1:before, #loader-1:after{
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: 10px solid transparent;
+  border-top-color: #ff3333;
+}
+
+#loader-1:before{
+  z-index: 100;
+  animation: spin 1s infinite;
+}
+
+#loader-1:after{
+  border: 10px solid #ccc;
+}
+
+@keyframes spin{
+  0%{
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100%{
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce{
+  0%, 75%, 100%{
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  25%{
+    -webkit-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    -o-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes squaremove{
+  0%, 100%{
+    -webkit-transform: translate(0,0) rotate(0);
+    -ms-transform: translate(0,0) rotate(0);
+    -o-transform: translate(0,0) rotate(0);
+    transform: translate(0,0) rotate(0);
+  }
+
+  25%{
+    -webkit-transform: translate(40px,40px) rotate(45deg);
+    -ms-transform: translate(40px,40px) rotate(45deg);
+    -o-transform: translate(40px,40px) rotate(45deg);
+    transform: translate(40px,40px) rotate(45deg);
+  }
+
+  50%{
+    -webkit-transform: translate(0px,80px) rotate(0deg);
+    -ms-transform: translate(0px,80px) rotate(0deg);
+    -o-transform: translate(0px,80px) rotate(0deg);
+    transform: translate(0px,80px) rotate(0deg);
+  }
+
+  75%{
+    -webkit-transform: translate(-40px,40px) rotate(45deg);
+    -ms-transform: translate(-40px,40px) rotate(45deg);
+    -o-transform: translate(-40px,40px) rotate(45deg);
+    transform: translate(-40px,40px) rotate(45deg);
+  }
+}
+
+@keyframes opacitychange{
+  0%, 100%{
+    opacity: 0;
+  }
+
+  60%{
+    opacity: 1;
+  }
+}
+
+@keyframes moveanimation1{
+  0%, 100%{
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+
+  75%{
+    -webkit-transform: translateX(30px);
+    -ms-transform: translateX(30px);
+    -o-transform: translateX(30px);
+    transform: translateX(30px);
+  }
+}
+
+@keyframes moveanimation2{
+  0%, 100%{
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+
+  75%{
+    -webkit-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    -o-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+}
+
+@keyframes moveanimation3{
+  0%, 100%{
+    -webkit-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    -o-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+  }
+
+  75%{
+    -webkit-transform: translate(30px, 30px);
+    -ms-transform: translate(30px, 30px);
+    -o-transform: translate(30px, 30px);
+    transform: translate(30px, 30px);
+  }
+}
+
+@keyframes grow{
+  0%, 100%{
+    -webkit-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+
+  50%{
+    -webkit-transform: scaleY(1.8);
+    -ms-transform: scaleY(1.8);
+    -o-transform: scaleY(1.8);
+    transform: scaleY(1.8);
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    transform: rotateY(180deg)  rotateX(180deg);
+  }
+}
+
+@keyframes rotatemove{
+  0%{
+    -webkit-transform: scale(1) translateX(0px);
+    -ms-transform: scale(1) translateX(0px);
+    -o-transform: scale(1) translateX(0px);
+    transform: scale(1) translateX(0px);
+  }
+
+  100%{
+    -webkit-transform: scale(2) translateX(45px);
+    -ms-transform: scale(2) translateX(45px);
+    -o-transform: scale(2) translateX(45px);
+    transform: scale(2) translateX(45px);
+  }
+}
+
+
+/* loader */
+
+
+/* login-page */
+
+ /*bootstrap class override for login page only*/
+ .form-control{
+  border-radius: 0px;
+  margin: 12px 3px;
+  height: 40px;
+}
+.logo{
+  margin: auto;
+  text-align: center;
+  padding-top: 20%;
+}
+.logo img{
+  height: 70px;
+}
+/*footer*/ 
+.footer a{
+  color: #000;
+  text-decoration: none;
+}
+.footer{
+  color: #000;
+  text-align: center;
+}
+/*footer end*/ 
+
+
+/*for logintemplate blue*/
+.grayBody{
+  background-color: #E9E9E9;
+}
+.loginbox{
+  margin-top: 5%;
+  border-top: 6px solid #0088D8;
+  background-color:#fff;
+  padding: 20px;
+  box-shadow: 0 10px 10px -2px rgba(0,0,0,0.12),0 -2px 10px -2px rgba(0,0,0,0.12);    
+}
+.singtext{    
+  font-size: 28px;  
+  color: #0088D8;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.submitButton{
+  background-color: #0088D8;
+  color: #fff;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  padding: 10px 0px;
+  width: 100%;
+  margin-left: 2px;
+  font-size: 16px;
+  border-radius: 0px;
+  outline: none;
+}
+.submitButton:hover,.submitButton:focus{
+  color: #fff;  
+  outline: none;
+}
+.forGotPassword{
+  background-color: #F2F2F2; 
+  padding: 15px 0px;
+  text-align: center;
+
+}
+.forGotPassword:hover{
+   box-shadow: 0 10px 10px -2px rgba(0,0,0,0.12);    
+}
+.forGotPassword a{
+  color: #000;
+  outline: none;
+}
+.forGotPassword a:hover, .forGotPassword a:active,.forGotPassword a:focus{  
+  text-decoration: none; 
+  outline: none;
+}
+
+/* login-page */
+
+.ion-icon{
+	margin-right: 3%;
+}
+
+.input-login{
+	background-color: transparent;
+}
+
+.btn-icon{
+	background: transparent;
+}
+
+.item-ios [item-right], .item-ios [item-end]{
+	background : transparent;
+}
+
+.label-md[stacked], .label-md[floating]{
+	color: #ff3333;
+}
+
+.login{
+	display: block;
+	margin-left: 25%;
+	width: 50%;
+}
+.real-login {
+	background-image: url('../images/home-banner.jpg');
+	background-size: cover;
+
+}
+
+.card{
+
+	margin-top: 10px;
+	border: #ff5400 1px solid;
+	align-items: center;
+	border-radius: 10px;
+}
+.imput-1{
+
+	
+	margin-right: 10%;
+	 
+	border: #ff5400 2px solid;
+	border-radius: 5px;
+	width: 100%;
+	padding: 10px;
+	outline: none;
+	
+
+}
+.input-container2 {
+	display: -ms-flexbox; /* IE10 */
+	display: flex;
+	width: 100%;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+.icon2 {
+	border-radius: 5px;
+	margin-left: 10%;
+	padding: 10px;
+	background: #ff5400;
+	color: white;
+	min-width: 50px;
+	text-align: center;
+}
+
+.card-b1{
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color:#ff5400; 
+	border: #ff5400 1px solid;
+	border-radius: 5px;
+	text-align: center;
+	color: #fff;
+	align-content: center;
+	
+	height: 50px;
+	width: 100%;
+	font-weight: bold;
+
+}
+
+.card-b2{
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color:#488aff; 
+	border: #488aff 1px solid;
+	border-radius: 5px;
+	text-align: center;
+	color: #fff;
+	align-content: center;
+	
+	height: 50px;
+	width: 100%;
+	font-weight: bold;
+
+}
+.card-txt{
+
+	
+	
+	border-radius: 5px;
+	text-align: center;
+	color: #0b0b0c;
+	align-content: center;      
+	
+	font-weight: bold;
+
+}
+.wrapper-login{
+	position: absolute;
+	top: 0;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.wrapper-login2{
+	
+	top: 0;
+   
+	
+	
+	align-items: center;
+	justify-content: center;
+	     
+
+}
