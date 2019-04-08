@@ -30,6 +30,7 @@ import { BemvindoPage } from './../pages/bemvindo/bemvindo';
 import { CadastroPage } from './../pages/cadastro/cadastro';
 import { WalletPage } from './../pages/wallet/wallet';
 import { PaymentFinishedPage} from './../pages/payment-finished/payment-finished';
+import { BrMaskerModule } from 'brmasker-ionic-3';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { PaymentFinishedPage} from './../pages/payment-finished/payment-finished
         { component: WalletPage, name: 'Saldo', segment: 'Saldo' }
       ]
     }),
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

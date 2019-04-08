@@ -60,52 +60,54 @@ export class MyApp {
 
       });      
 
-      this.oneSignal.startInit('52c74b91-44e0-4794-a884-e64d11d52199', '762489166518');
-      this.oneSignal.registerForPushNotifications();
-      this.oneSignal.getIds().then((ids) => {
+      if (platform.is('cordova')) {
+        this.oneSignal.startInit('52c74b91-44e0-4794-a884-e64d11d52199', '762489166518');
+        this.oneSignal.registerForPushNotifications();
+        this.oneSignal.getIds().then((ids) => {
 
-        this.pushToken = ids.userId;        
-        localStorage.setItem('pushToken', this.pushToken);
+          this.pushToken = ids.userId;        
+          localStorage.setItem('pushToken', this.pushToken);
 
-        setTimeout(() => { this.Global.sendToken(); }, 2000);
-      });
+          setTimeout(() => { this.Global.sendToken(); }, 2000);
+        });
 
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-      this.oneSignal.handleNotificationReceived().subscribe(() => {
-       // do something when notification is received
-      });
-      this.oneSignal.handleNotificationOpened().subscribe((data) => {
-        // do something when a notification is opened
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+        this.oneSignal.handleNotificationReceived().subscribe(() => {
+         // do something when notification is received
+        });
+        this.oneSignal.handleNotificationOpened().subscribe((data) => {
+          // do something when a notification is opened
 
-        if (data.notification.payload.additionalData.loja) {
+          if (data.notification.payload.additionalData.loja) {
 
-          if (this.Global.run == 1){
-            $('#loading').show();
-            $('.button-collapse').sideNav('hide');
-            self.nav.setRoot('Loja',{'id': data.notification.payload.additionalData.loja});
-          }else{
-            localStorage.setItem('GuiaLink', 'Loja-'+data.notification.payload.additionalData.loja);
-          }
+            if (this.Global.run == 1){
+              $('#loading').show();
+              $('.button-collapse').sideNav('hide');
+              self.nav.setRoot('Loja',{'id': data.notification.payload.additionalData.loja});
+            }else{
+              localStorage.setItem('GuiaLink', 'Loja-'+data.notification.payload.additionalData.loja);
+            }
 
+              
+          }else if (data.notification.payload.additionalData.produto) {
             
-        }else if (data.notification.payload.additionalData.produto) {
-          
-          if (this.Global.run == 1){
-            $('#loading').show();
-            $('.button-collapse').sideNav('hide');
-            self.nav.setRoot('Produto',{'id': data.notification.payload.additionalData.produto});
-          }else{            
-            localStorage.setItem('GuiaLink', 'Produto-'+data.notification.payload.additionalData.produto);
+            if (this.Global.run == 1){
+              $('#loading').show();
+              $('.button-collapse').sideNav('hide');
+              self.nav.setRoot('Produto',{'id': data.notification.payload.additionalData.produto});
+            }else{            
+              localStorage.setItem('GuiaLink', 'Produto-'+data.notification.payload.additionalData.produto);
+            }
+
+              // $('#loading').show();
+              // $('.button-collapse').sideNav('hide');
+              // self.nav.setRoot('Produto',{'id': data.notification.payload.additionalData.produto});
           }
 
-            // $('#loading').show();
-            // $('.button-collapse').sideNav('hide');
-            // self.nav.setRoot('Produto',{'id': data.notification.payload.additionalData.produto});
-        }
+        });
 
-      });
-
-      this.oneSignal.endInit();
+        this.oneSignal.endInit();
+      }
       
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

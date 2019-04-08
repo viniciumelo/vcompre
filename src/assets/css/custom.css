@@ -474,3 +474,149 @@ html {
 	     
 
 }
+
+.page-wallet .header .toolbar {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.page-wallet .header .toolbar .toolbar-title {
+  font-weight: normal !important;
+  font-size: 2.4rem;
+}
+
+.page-wallet .scroll-content {
+  background-image: url("../imgs/menu.jpeg") !important;
+  background-size: cover;
+}
+
+.page-wallet .page-content {
+  margin-bottom: 2rem;
+  padding: 2rem 4rem 0;
+}
+
+.page-wallet .page-content .item-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-wallet .page-content .item-info .item-info--label {
+  font-size: 1.4rem;
+  color: #000;
+  line-height: 1;
+  font-weight: bold;
+  margin-bottom: .5rem;
+}
+
+.page-wallet .page-content .item-info .item-info--value {
+  padding: .6rem;
+  border-radius: 12px;
+  border: 2px solid #db5800;
+  background: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.page-wallet .page-content .affiliate {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  padding-bottom: .5rem;
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.page-wallet .page-content .affiliate .affiliate--field {
+  padding: 0 .5rem;
+}
+
+.page-wallet .page-content .affiliate .affiliate--field .item {
+  padding-left: 0;
+}
+
+.page-wallet .page-content .affiliate .affiliate--field .item .item-inner {
+  border-bottom: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  padding-right: 0 !important;
+}
+
+.page-wallet .page-content .affiliate .affiliate--field .item .label {
+  margin-top: 0;
+  font-size: 2rem;
+  color: #777;
+  font-weight: bold;
+}
+
+.page-wallet .page-content .affiliate .affiliate--field .item .select-text {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.page-wallet .page-submit {
+  padding: 0 4rem;
+}
+
+.page-wallet .page-submit .btn {
+  font-size: 2.2rem;
+  color: #fff;
+  text-transform: uppercase;
+  height: 55px;
+  border-radius: 12px;
+  font-weight: normal;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.page-wallet .field .item .item-inner {
+  background-color: #fff;
+  border: 2px solid #db5800;
+  border-radius: 12px;
+}
+
+.page-wallet .field .item .item-inner {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.page-wallet .field .item input {
+  text-align: center;
+  font-size: 2rem;
+  color: #000;
+  font-weight: bold;
+  margin: 0;
+  border-bottom: 0;
+  height: 4rem;
+}
+
+.page-wallet .field .item input:focus {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+.page-wallet .label {
+  text-align: center;
+  display: block;
+}
+
+.page-wallet select {
+  display: block !important;
+  margin: 10px 0;
+  border: 0;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.page-wallet select:active {
+  border: 0 !important;
+  outline: none !important;
+}
+
+.page-wallet select:focus {
+  border: 0 !important;
+  outline: none !important;
+}
+

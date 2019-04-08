@@ -1,54 +1,52 @@
-<page-header></page-header>
-<ion-header>
-    <ion-navbar color="primary">
+<div class="page-wallet">
+    <ion-header class="noshow">
+      <ion-navbar>
         <ion-title>Saldos</ion-title>
-    </ion-navbar>
-</ion-header>
+      </ion-navbar>
+    </ion-header>
 
-<ion-content padding>
-        
-
-    <div class="page-content">
-        <div class="item-info">
-            <div class="item-info--label">Total de pontos</div>
-            <div class="item-info--value">{{ points[currentStore.id]?.points || 0 }}</div>
-        </div>
-        <div class="item-info">
-            <div class="item-info--label">Total de pontos liberados</div>
-            <div class="item-info--value">{{ points[currentStore.id]?.available_points || 0 }}</div>
-        </div>
-        <div class="item-info">
-            <div class="item-info--label">Valor em cashback</div>
-            <div class="item-info--value">{{ (points[currentStore.id]?.cashback || 0.00) | currency:'BRL' }}</div>
-        </div>
-        <div class="item-info">
-            <div class="item-info--label">Transferir pontos</div>
-            <div class="field">
-                <ion-item>
-                    <ion-input type="number" [(ngModel)]="withdraw.points"></ion-input>
-                </ion-item>
+    <ion-content>
+        <page-header></page-header>
+        <div class="page-content container">
+            <div class="item-info">
+                <div class="item-info--label">Total de pontos</div>
+                <div class="item-info--value">{{ points[currentStore.id]?.points || 0 }}</div>
+            </div>
+            <div class="item-info">
+                <div class="item-info--label">Total de pontos liberados</div>
+                <div class="item-info--value">{{ points[currentStore.id]?.available_points || 0 }}</div>
+            </div>
+            <div class="item-info">
+                <div class="item-info--label">Valor em cashback</div>
+                <div class="item-info--value">{{ (points[currentStore.id]?.cashback || 0.00) | currency:'BRL' }}</div>
+            </div>
+            <div class="item-info">
+                <div class="item-info--label">Transferir pontos</div>
+                <div class="field">
+                    <ion-item>
+                        <input type="number" [(ngModel)]="withdraw.points">
+                    </ion-item>
+                </div>
+            </div>
+            <div class="item-info">
+                <div class="item-info--label">Transferir cashbacks</div>
+                <div class="field">
+                    <ion-item>
+                        <input type="tel" [brmasker]="{money: true}" [(ngModel)]="withdraw.cashback">
+                    </ion-item>
+                </div>
+            </div>
+            <div class="affiliate">
+                <div class="affiliate--field">
+                    <ion-label>Rede afiliada</ion-label>
+                    <select class="form-control" [(ngModel)]="currentStore">
+                        <option *ngFor="let store of stores" [value]="store">{{ store?.empresa?.name }}</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="item-info">
-            <div class="item-info--label">Transferir cashbacks</div>
-            <div class="field">
-                <ion-item>
-                    <ion-input type="tel" [(ngModel)]="withdraw.cashback" ></ion-input>
-                </ion-item>
-            </div>
+        <div class="page-submit">
+            <button type="button" class="btn orange" (click)="continue()" [disabled]="withdraw.points == 0 && withdraw.cashback == 0">Continuar</button>
         </div>
-        <div class="affiliate">
-            <div class="affiliate--field">
-                <ion-item>
-                    <ion-label stacked>Rede afiliada</ion-label>
-                    <ion-select [(ngModel)]="currentStore">
-                        <ion-option *ngFor="let store of stores" [value]="store">{{ store?.empresa?.name }}</ion-option>
-                    </ion-select>
-                </ion-item>
-            </div>
-        </div>
-    </div>
-    <div class="page-submit">
-        <button ion-button type="button" color="primary" block (click)="continue()" [disabled]="withdraw.points == 0 && withdraw.cashback == 0">Continuar</button>
-    </div>
-</ion-content>
+    </ion-content>
+</div>
