@@ -62,6 +62,7 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
       links: [
         { component: HomePage, name: 'Home', segment: 'Home' },
         { component: PaymentFormPage, name: 'Pagar', segment: 'Pagar' },
+        { component: PaymentFinishedPage, name: 'Pagamento Concluído', segment: 'PagamentoConcluido' },
         { component: LojaPage, name: 'Loja', segment: 'Loja' }, 
         { component: ProdutoPage, name: 'Produto', segment: 'Produto' },
         { component: LoginPage, name: 'Login', segment: 'Login' },

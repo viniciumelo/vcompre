@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PaymentFinishedPage } from '../payment-finished/payment-finished';
 import { HttpClient } from '@angular/common/http';
@@ -21,19 +21,18 @@ export class PaymentFormPage {
   constructor(
     private _navCtrl: NavController,
     private _fb: FormBuilder,
-    private _loading: LoadingController,
     private _alert: AlertController,
     private _http: HttpClient,
     private _global: Global
   ) {
     this.form = this._fb.group({
       payment_type: ['credit', Validators.required],
-      card_number: ['4539 0033 7072 5497', Validators.required],
-      expiration: ['12/20', Validators.required],
-      holder_name: ['João Silva', Validators.required],
-      security_code: ['123', Validators.required],
-      terms: [true, Validators.requiredTrue],
-      amount: ['1000', Validators.required]
+      card_number: ['', Validators.required],
+      expiration: ['', Validators.required],
+      holder_name: ['', Validators.required],
+      security_code: ['', Validators.required],
+      terms: [null, Validators.requiredTrue],
+      amount: ['', Validators.required]
     });
   }
 
@@ -44,9 +43,6 @@ export class PaymentFormPage {
 
   submit() {
     if (this.form.valid) {
-      let loading = this._loading.create({content: 'Carregando...'});
-      loading.present();
-
       let expirationPieces = this.form.value['expiration'].split('/');
       let amount = parseInt(this.form.value['amount'].replace(/\D/g, '')) * 100;
 
@@ -69,13 +65,9 @@ export class PaymentFormPage {
         };
 
         this.storeTransaction(transaction).subscribe(tRes => {
-          loading.dismiss();
-
           let user = this.getUser();
 
           if (!user) {
-            loading.dismiss();
-
             $.alert({
               title: 'Atenção!',
                 content: 'Você não está autenticado, tente novamente.',
@@ -84,15 +76,13 @@ export class PaymentFormPage {
           } else {
             this.storeApi({
               user_id: user['id'],
-              transaction_id: res['id'],
-              transaction_uri: res['uri'],
-              transaction_status: res['status'],
-              amount: res['amount']
+              transaction_id: tRes['id'],
+              transaction_uri: tRes['uri'],
+              transaction_status: tRes['status'],
+              amount: tRes['amount']
             }).subscribe(aRes => {
               this._navCtrl.setRoot(PaymentFinishedPage);
             }, aErr => {
-              loading.dismiss();
-
               $.alert({
                 title: 'Atenção!',
                   content: 'Houve um erro ao salvar as informações da transação, tente novamente.',
@@ -101,8 +91,6 @@ export class PaymentFormPage {
             });
           }
         }, tErr => {
-          loading.dismiss();
-
           $.alert({
             title: 'Atenção!',
               content: 'Houve um erro ao processar o seu pagamento, verifique as informações digitadas e tente novamente.',
@@ -110,8 +98,6 @@ export class PaymentFormPage {
           });
         });
       }, err => {
-        loading.dismiss();
-
         $.alert({
           title: 'Atenção!',
             content: 'Houve um erro ao salvar as informações do seu pagamento, verifique as informações digitadas e tente novamente.',

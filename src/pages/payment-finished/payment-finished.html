@@ -1,23 +1,27 @@
-<ion-header>
-    <ion-navbar color="primary">
-        <ion-title>Pagamentos</ion-title>
-    </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-    <div class="steps">
-        <div class="step">Agendar</div>
-        <div class="separator"></div>
-        <div class="step">Pagar</div>
-        <div class="separator"></div>
-        <div class="step current">Finalizar</div>
-    </div>
-    <div class="page-content">
-        <div class="icon"><ion-icon name="md-checkmark"></ion-icon></div>
-        <h2>Pagamento concluído</h2>
-        <p>Seu pagamento foi aprovado com sucesso!</p>
-    </div>
-    <div class="page-button">
-        <button ion-button type="submit" color="primary" block (click)="continue()">Continuar</button>
-    </div>
-</ion-content>
+<div class="page-payment-finished">
+    <ion-header class="noshow">
+        <ion-navbar color="primary">
+            <ion-title>Pagamentos</ion-title>
+        </ion-navbar>
+    </ion-header>
+    <ion-content padding>
+        <page-header></page-header>
+        <div class="container">
+            <div class="steps">
+                <div class="step">Agendar</div>
+                <div class="separator"></div>
+                <div class="step">Pagar</div>
+                <div class="separator"></div>
+                <div class="step current">Finalizar</div>
+            </div>
+            <div class="page-content">
+                <div class="icon"><span class="material-icons">checkmark</span></div>
+                <h2>Pagamento concluído</h2>
+                <p>Seu pagamento foi aprovado com sucesso!</p>
+            </div>
+            <div class="page-button">
+                <button type="submit" class="btn orange" block (click)="continue()">Continuar</button>
+            </div>
+        </div>
+    </ion-content>
+</div>
