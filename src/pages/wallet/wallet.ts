@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Global } from './../../app/global';
 
@@ -49,7 +49,6 @@ export class WalletPage {
     private _navParams: NavParams,
     private _http: HttpClient,
     private _alert: AlertController,
-    private _loading: LoadingController,
     private _global: Global
   ) {
     if (this.getUser()) {
@@ -68,12 +67,7 @@ export class WalletPage {
   }
 
   getWallet() {
-    let loading = this._loading.create({content: 'Carregando...'});
-    loading.present();
-
     this._http.get(this._global.apiURL + '/api/wallets/' + this.user['id']).subscribe(res => {
-      loading.dismiss();
-
       this.stores = res['data']['stores'];
       this.points = res['data']['points'];
 
@@ -81,9 +75,6 @@ export class WalletPage {
         this.currentStore = this.stores[0];
       }
     }, err => {
-      loading.dismiss();
-
-
       $.alert({
         title: 'Atenção!',
           content: 'Houve um erro ao obter o seu saldo, tente novamente.',
