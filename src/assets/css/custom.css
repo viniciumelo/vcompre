@@ -620,3 +620,143 @@ html {
   outline: none !important;
 }
 
+.page-payment-form .header:after {
+  display: none;
+}
+
+.page-payment-form .header .toolbar {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.page-payment-form .header .toolbar .toolbar-title {
+  font-weight: normal !important;
+  font-size: 2.4rem;
+}
+
+.page-payment-form {
+  background-image: url("../imgs/menu.jpeg");
+  background-size: cover;
+}
+
+.page-payment-form .steps {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 2rem 0;
+}
+
+.page-payment-form .steps .step {
+  border: 2px solid #db5800;
+  padding: 2px 15px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: #db5800;
+}
+
+.page-payment-form .steps .step.current {
+  font-weight: 500;
+  border-width: 3px;
+}
+
+.page-payment-form .steps .step.not-available {
+  color: #000;
+  border-color: #000;
+}
+
+.page-payment-form .steps .separator {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.page-payment-form .steps .separator:after {
+  background-color: #db5800;
+  content: ' ';
+  display: block;
+  height: 2px;
+  width: 100%;
+}
+
+.page-payment-form .steps .separator.not-available:after {
+  background-color: #000;
+}
+
+.page-payment-form .item {
+  background-color: transparent;
+  padding-left: 0;
+}
+
+.page-payment-form .item-checkbox .checkbox {
+  margin-right: 1rem !important;
+  margin-left: 0 !important;
+}
+
+.page-payment-form .item-checkbox .item-inner {
+  border-bottom: 0 !important;
+}
+
+.page-payment-form .item-checkbox .item-inner .label {
+  font-size: 1.4rem;
+}
+
+.page-payment-form .field-group {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.page-payment-form .field-group .icon {
+  margin-right: 2rem;
+  width: 3rem;
+  padding-top: .5rem;
+  color: #db5800;
+  font-size: 3rem;
+}
+
+.page-payment-form .field-group .field {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.page-payment-form .field-group .field p {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #999;
+}
+
+.page-payment-form .page-form {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 2px solid #db5800;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+}
+
+.page-payment-form .page-submit {
+  padding: 0 4rem;
+}
+
+.page-payment-form .page-submit .button {
+  font-size: 2.2rem;
+  color: #fff;
+  text-transform: uppercase;
+  height: 55px;
+  border-radius: 12px;
+  font-weight: normal;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
