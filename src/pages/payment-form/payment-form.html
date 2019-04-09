@@ -1,91 +1,80 @@
-<page-header></page-header>
-<ion-header>
-    <ion-navbar color="primary">
-        <ion-title>Pagamentos</ion-title>
-    </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-       
-
-    <div class="steps">
-        <div class="step">Comprar</div>
-        <div class="separator"></div>
-        <div class="step current">Pagar</div>
-        <div class="separator not-available"></div>
-        <div class="step not-available">Finalizar</div>
-    </div>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-        <div class="page-form">
-            <div class="field-group">
-                <div class="icon"><ion-icon name="md-card"></ion-icon></div>
-                <div class="field">
-                    <ion-item>
-                        <ion-label floating>Forma de pagamento</ion-label>
-                        <ion-select formControlName="payment_type">
-                            <ion-option value="credit">Cartão de crédito</ion-option>
-                        </ion-select>
-                    </ion-item>
-                </div>
+<div class="page-payment-form">
+    <ion-header class="noshow">
+        <ion-navbar color="primary">
+            <ion-title>Pagamentos</ion-title>
+        </ion-navbar>
+    </ion-header>
+    <ion-content padding>
+        <page-header></page-header>
+        <div class="container">
+            <div class="steps">
+                <div class="step">Comprar</div>
+                <div class="separator"></div>
+                <div class="step current">Pagar</div>
+                <div class="separator not-available"></div>
+                <div class="step not-available">Finalizar</div>
             </div>
-            <div class="field-group">
-                <div class="icon"></div>
-                <div class="field">
-                    <ion-item>
-                        <ion-label floating>Número do cartão</ion-label>
-                        <ion-input type="tel" formControlName="card_number"></ion-input>
-                    </ion-item>
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <div class="page-form">
+                    <div class="field-group">
+                        <div class="icon"><i class="material-icons">credit_card</i></div>
+                        <div class="field">
+                            <label floating>Forma de pagamento</label>
+                            <select class="form-control" formControlName="payment_type">
+                                <option value="credit">Cartão de crédito</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="icon"></div>
+                        <div class="field">
+                            <label floating>Número do cartão</label>
+                            <input type="tel" formControlName="card_number">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="icon"></div>
+                        <div class="field">
+                            <label floating>Data de expiração</label>
+                            <input type="tel" formControlName="expiration">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="icon"></div>
+                        <div class="field">
+                            <label floating>Nome igual no cartão</label>
+                            <input type="text" formControlName="holder_name">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="icon"></div>
+                        <div class="field">
+                            <label floating>Código de segurança</label>
+                            <input type="number" formControlName="security_code">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="icon"></div>
+                        <div class="field">
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" formControlName="terms" id="acceptTermsCheckbox">
+                                <label class="form-check-label" for="acceptTermsCheckbox">Aceito os termos de uso</label>
+                            </div>
+                            <p>Selecione aqui para comprovar que você leu e concorda com as condições de sua ordem.</p>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="icon"><ion-icon name="md-cash"></ion-icon></div>
+                        <div class="field">
+                            <label floating>Valor</label>
+                            <input type="tel" formControlName="amount" [brmasker]="{money: true}">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="field-group">
-                <div class="icon"></div>
-                <div class="field">
-                    <ion-item>
-                        <ion-label floating>Data de expiração</ion-label>
-                        <ion-input type="tel" formControlName="expiration"></ion-input>
-                    </ion-item>
+                <div class="page-submit">
+                    <button type="submit" class="btn orange" [disabled]="!form.valid">Próximo passo</button>
                 </div>
-            </div>
-            <div class="field-group">
-                <div class="icon"></div>
-                <div class="field">
-                    <ion-item>
-                        <ion-label floating>Nome igual no cartão</ion-label>
-                        <ion-input type="text" formControlName="holder_name"></ion-input>
-                    </ion-item>
-                </div>
-            </div>
-            <div class="field-group">
-                <div class="icon"></div>
-                <div class="field">
-                    <ion-item>
-                        <ion-label floating>Código de segurança</ion-label>
-                        <ion-input type="number" formControlName="security_code"></ion-input>
-                    </ion-item>
-                </div>
-            </div>
-            <div class="field-group">
-                <div class="icon"></div>
-                <div class="field">
-                    <ion-item>
-                        <ion-label>Aceito os termos de uso</ion-label>
-                        <ion-checkbox formControlName="terms"></ion-checkbox>
-                    </ion-item>
-                    <p>Selecione aqui para comprovar que você leu e concorda com as condições de sua ordem.</p>
-                </div>
-            </div>
-            <div class="field-group">
-                <div class="icon"><ion-icon name="md-cash"></ion-icon></div>
-                <div class="field">
-                    <ion-item>
-                        <ion-label floating>Valor</ion-label>
-                        <ion-input type="tel" formControlName="amount"></ion-input>
-                    </ion-item>
-                </div>
-            </div>
+            </form>
         </div>
-        <div class="page-submit">
-            <button ion-button type="submit" color="primary" block [disabled]="!form.valid">Próximo passo</button>
-        </div>
-    </form>
-</ion-content>
+    </ion-content>
+</div>

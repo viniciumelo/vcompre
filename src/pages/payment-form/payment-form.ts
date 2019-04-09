@@ -3,6 +3,9 @@ import { NavController, LoadingController, AlertController } from 'ionic-angular
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PaymentFinishedPage } from '../payment-finished/payment-finished';
 import { HttpClient } from '@angular/common/http';
+import { Global } from './../../app/global';
+
+declare var $;
 
 @Component({
   selector: 'page-payment-form',
@@ -20,7 +23,8 @@ export class PaymentFormPage {
     private _fb: FormBuilder,
     private _loading: LoadingController,
     private _alert: AlertController,
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _global: Global
   ) {
     this.form = this._fb.group({
       payment_type: ['credit', Validators.required],
@@ -31,6 +35,11 @@ export class PaymentFormPage {
       terms: [true, Validators.requiredTrue],
       amount: ['1000', Validators.required]
     });
+  }
+
+  ionViewWillEnter() {
+    this._global.themeInit();
+    $('#loading').fadeOut(200);
   }
 
   submit() {
@@ -67,11 +76,11 @@ export class PaymentFormPage {
           if (!user) {
             loading.dismiss();
 
-            this._alert.create({
-              title: 'Erro',
-              subTitle: 'Você não está autenticado, tente novamente.',
-              buttons: ['OK']
-            }).present();
+            $.alert({
+              title: 'Atenção!',
+                content: 'Você não está autenticado, tente novamente.',
+                theme: 'modern'
+            });
           } else {
             this.storeApi({
               user_id: user['id'],
@@ -84,30 +93,30 @@ export class PaymentFormPage {
             }, aErr => {
               loading.dismiss();
 
-              this._alert.create({
-                title: 'Erro',
-                subTitle: 'Houve um erro ao salvar as informações da transação, tente novamente.',
-                buttons: ['OK']
-              }).present();
+              $.alert({
+                title: 'Atenção!',
+                  content: 'Houve um erro ao salvar as informações da transação, tente novamente.',
+                  theme: 'modern'
+              });
             });
           }
         }, tErr => {
           loading.dismiss();
 
-          this._alert.create({
-            title: 'Erro',
-            subTitle: 'Houve um erro ao processar o seu pagamento, verifique as informações digitadas e tente novamente.',
-            buttons: ['OK']
-          }).present();
+          $.alert({
+            title: 'Atenção!',
+              content: 'Houve um erro ao processar o seu pagamento, verifique as informações digitadas e tente novamente.',
+              theme: 'modern'
+          });
         });
       }, err => {
         loading.dismiss();
 
-        this._alert.create({
-          title: 'Erro',
-          subTitle: 'Houve um erro ao salvar as informações do seu pagamento, verifique as informações digitadas e tente novamente.',
-          buttons: ['OK']
-        }).present();
+        $.alert({
+          title: 'Atenção!',
+            content: 'Houve um erro ao salvar as informações do seu pagamento, verifique as informações digitadas e tente novamente.',
+            theme: 'modern'
+        });
       });
     }
   }
@@ -139,7 +148,7 @@ export class PaymentFormPage {
   }
 
   storeApi(data) {
-    return this._http.post('http://vcompreeganhe.com.br/api/transactions', data);
+    return this._http.post(this._global.apiURL + '/api/transactions', data);
   }
 
 }
