@@ -60,16 +60,6 @@ export class Global {
                     Materialize.updateTextFields();
                 });             
                 
-                $('#atendimento').barrating({
-                    theme: 'fontawesome-stars'
-                });
-                $('#qualidade').barrating({
-                    theme: 'fontawesome-stars'
-                });
-                $('#ambiente').barrating({
-                    theme: 'fontawesome-stars'
-                });
-                
         }), 200);
     }
     

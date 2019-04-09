@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { Global } from './../../app/global';
+
+declare var $;
 
 @IonicPage()
 @Component({
@@ -23,7 +26,14 @@ export class WalletPage {
     }
   };
 
-  stores: any = [];
+  stores: any = [
+    {
+      id: 0,
+      empresa: {
+        name: 'Nenhuma rede selecionada'
+      }
+    }
+  ];
 
   withdraw: any = {
     points: 0,
@@ -39,7 +49,8 @@ export class WalletPage {
     private _navParams: NavParams,
     private _http: HttpClient,
     private _alert: AlertController,
-    private _loading: LoadingController
+    private _loading: LoadingController,
+    private _global: Global
   ) {
     if (this.getUser()) {
       this.user = this.getUser();
@@ -47,14 +58,20 @@ export class WalletPage {
   }
 
   ionViewWillEnter() {
+    this.obter();
     this.getWallet();
+  }
+
+  obter() {
+    this._global.themeInit();
+    $('#loading').fadeOut(200);
   }
 
   getWallet() {
     let loading = this._loading.create({content: 'Carregando...'});
     loading.present();
 
-    this._http.get('http://127.0.0.1:8000/api/wallets/' + this.user['id']).subscribe(res => {
+    this._http.get(this._global.apiURL + '/api/wallets/' + this.user['id']).subscribe(res => {
       loading.dismiss();
 
       this.stores = res['data']['stores'];
@@ -66,11 +83,12 @@ export class WalletPage {
     }, err => {
       loading.dismiss();
 
-      this._alert.create({
-        title: 'Erro',
-        subTitle: 'Houve um erro ao obter o seu saldo, tente novamente.',
-        buttons: ['OK']
-      }).present();
+
+      $.alert({
+        title: 'Atenção!',
+          content: 'Houve um erro ao obter o seu saldo, tente novamente.',
+          theme: 'modern'
+      });
     });
   }
 
